@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <title>JSP Page</title>
+        <title>Salary Info</title>
     </head>
     
     <%
@@ -13,6 +13,53 @@
       double rate = Double.parseDouble(request.getParameter("rate"));
       double preDeduction = Double.parseDouble(request.getParameter("preDeduction"));
       double postDeduction = Double.parseDouble(request.getParameter("postDeduction"));
+      double hoursOvertime;
+      double overtimeRate;
+      double grossPay;
+      double preTaxPay;
+      double taxRate;
+      double taxAmount;
+      double postTaxPay;
+      double netPay;
+      
+      if(hours>40)
+      {
+          hoursOvertime = hours - 40;
+          overtimeRate = 1.5 * rate; 
+          grossPay = (40*rate) + (overtimeRate * hoursOvertime);
+          preTaxPay = grossPay - preDeduction;
+          if(grossPay < 500)
+          {
+                taxRate = .18;
+                taxAmount = preTaxPay * taxRate;
+          }
+          else
+          {
+                taxRate = .22;
+                taxAmount = preTaxPay * taxRate;
+          }
+          postTaxPay = preTaxPay * taxRate;
+          netPay = postTaxPay - postDeduction;
+      }
+      else
+      {
+          hoursOvertime = 0;
+          overtimeRate = 0; 
+          grossPay = (hours*rate);
+          preTaxPay = grossPay - preDeduction;
+          if(grossPay < 500)
+          {
+                taxRate = .18;
+                taxAmount = preTaxPay * taxRate;
+          }
+          else
+          {
+                taxRate = .22;
+                taxAmount = preTaxPay * taxRate;
+          }
+          postTaxPay = preTaxPay * taxRate;
+          netPay = postTaxPay - postDeduction;
+      }
         
     %>
     
@@ -26,65 +73,65 @@
             <tbody>
                 <tr>
                     <td>Total Hours Worked:</td>
-                    <td></td>
+                    <td><%= hours %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Hourly Rate:</td>
-                    <td></td>
+                    <td><%= rate %></td>
                 </tr>
                 
                 
                 <tr>
                     <td># Hours Overtime:</td>
-                    <td></td>
+                    <td><%= hoursOvertime %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Overtime Hourly Rate:</td>
-                    <td></td>
+                    <td><%= overtimeRate %></td>
                 </tr>
                 
                  <tr>
                     <td>Gross Pay:</td>
-                    <td></td>
+                    <td><%= grossPay %> </td>
                 </tr>
                 
                 
                 <tr>
                     <td>Pre-tax Deduct:</td>
-                    <td></td>
+                    <td><%= preDeduction %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Pre-tax Pay:</td>
-                    <td></td>
+                    <td><%= preTaxPay %> </td>
                 </tr>
                 
                 
                 <tr>
                     <td>Tax Amount</td>
-                    <td></td>
+                    <td><%= taxAmount %></td>
                 </tr>
                 
-                 <tr>
+                <tr>
                     <td>Post-tax Pay:</td>
-                    <td></td>
+                    <td><%= postTaxPay %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Post-tax Deduct:</td>
-                    <td></td>
+                    <td><%= postDeduction %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Net Pay:</td>
-                    <td></td>
+                    <td><%= netPay %></td>
                 </tr>
             </tbody>
          </table>

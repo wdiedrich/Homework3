@@ -5,7 +5,8 @@ body {background: blue;
 
 .resultTable {background: white;
               color: black;
-              font-weight: bold;}
+              margin-right: auto;
+              margin-left: auto;}
 
 .buttons {align-content: center;}
 
