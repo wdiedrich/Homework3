@@ -57,7 +57,7 @@
                 taxRate = .22;
                 taxAmount = preTaxPay * taxRate;
           }
-          postTaxPay = preTaxPay * taxRate;
+          postTaxPay = preTaxPay-taxAmount;
           netPay = postTaxPay - postDeduction;
       }
         
