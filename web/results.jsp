@@ -94,7 +94,7 @@
                 
                 <tr>
                     <td>Overtime Hourly Rate:</td>
-                    <td><%= overtimeRate %></td>
+                    <td><%= formatter.format(overtimeRate) %></td>
                 </tr>
                 
                  <tr>
