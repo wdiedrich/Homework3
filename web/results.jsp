@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import = "java.text.DecimalFormat"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,6 +9,7 @@
     </head>
     
     <%
+        
         
       double hours = Double.parseDouble(request.getParameter("hours"));
       double rate = Double.parseDouble(request.getParameter("rate"));
@@ -60,16 +62,17 @@
           postTaxPay = preTaxPay-taxAmount;
           netPay = postTaxPay - postDeduction;
       }
-        
+      
+
+      DecimalFormat formatter = new DecimalFormat("$#0.00");
     %>
     
     <body>
     <div class="leftDiv">
         <h1>Salary Info</h1>
         <hr>
-        
-         <div class="resultTable">
-         <table border="1">
+        <div>
+         <table class="resultTable">
             <tbody>
                 <tr>
                     <td>Total Hours Worked:</td>
@@ -79,7 +82,7 @@
                 
                 <tr>
                     <td>Hourly Rate:</td>
-                    <td><%= rate %></td>
+                    <td><%= formatter.format(rate) %></td>
                 </tr>
                 
                 
@@ -96,46 +99,46 @@
                 
                  <tr>
                     <td>Gross Pay:</td>
-                    <td><%= grossPay %> </td>
+                    <td><%= formatter.format(grossPay) %> </td>
                 </tr>
                 
                 
                 <tr>
                     <td>Pre-tax Deduct:</td>
-                    <td><%= preDeduction %></td>
+                    <td><%= formatter.format(preDeduction) %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Pre-tax Pay:</td>
-                    <td><%= preTaxPay %> </td>
+                    <td><%= formatter.format(preTaxPay) %> </td>
                 </tr>
                 
                 
                 <tr>
                     <td>Tax Amount</td>
-                    <td><%= taxAmount %></td>
+                    <td><%= formatter.format(taxAmount) %></td>
                 </tr>
                 
                 <tr>
                     <td>Post-tax Pay:</td>
-                    <td><%= postTaxPay %></td>
+                    <td><%= formatter.format(postTaxPay) %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Post-tax Deduct:</td>
-                    <td><%= postDeduction %></td>
+                    <td><%= formatter.format(postDeduction) %></td>
                 </tr>
                 
                 
                 <tr>
                     <td>Net Pay:</td>
-                    <td><%= netPay %></td>
+                    <td><%= formatter.format(netPay) %></td>
                 </tr>
             </tbody>
          </table>
-         </div>
-
+        </div>
+    </div>
     </body>
 </html>
